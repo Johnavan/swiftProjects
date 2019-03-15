@@ -55,14 +55,33 @@ class DrawView: UIView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        print(#function)
+        let touch = touches.first!
+        let location = touch.location(in: self);
+        currentLine?.end = location;
+        setNeedsDisplay();
      
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //TODO
+       
+        print(#function)
+        if var line = currentLine {
+            let touch = touches.first!;
+            let location = touch.location(in: self);
+            line.end = location;
+            finishedLine.append(line);
+        }
+        currentLine = nil;
+        setNeedsDisplay();
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
-        //TODO
+        
+        print(#function) 
+        currentLine = nil;
+        setNeedsDisplay();
+    
     }
 }
