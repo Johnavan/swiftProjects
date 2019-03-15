@@ -45,12 +45,24 @@ class DrawView: UIView {
     }
     
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         print(#function)
         let touch = touches.first!
         let location = touch.location(in: self)
         currentLine = Line(begin: location, end: location)
         setNeedsDisplay()
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+     
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //TODO
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+        //TODO
     }
 }
