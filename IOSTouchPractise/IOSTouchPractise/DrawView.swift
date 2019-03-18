@@ -15,9 +15,9 @@ class DrawView: UIView {
     let line1 = Line(begin: CGPoint (x:50,y:50), end: CGPoint(x:100,y:100))
     let line2 = Line(begin: CGPoint (x:50, y:100), end: CGPoint(x:100,y:300))
     
-    var finishedLineColor: UIColor = UIColor.blue
-    var currentLineColor: UIColor = UIColor.black
-    var lineThickness: CGFloat = 10
+   // var finishedLineColor: UIColor = UIColor.blue
+   // var currentLineColor: UIColor = UIColor.black
+   // var lineThickness: CGFloat = 10
     
     func strokeLine (line: Line){
         //Use BezierPath to draw lines
@@ -31,6 +31,7 @@ class DrawView: UIView {
     
     override func draw(_ rect: CGRect) {
         for line in finishedLine{
+            finishedLineColor.setStroke(); //set colour to draw
             strokeLine(line: line)
         }
         
@@ -79,9 +80,25 @@ class DrawView: UIView {
     
     override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
         
-        print(#function) 
+        print(#function)
         currentLine = nil;
         setNeedsDisplay();
     
+    }
+    
+    @IBInspectable var finishedLineColor: UIColor = UIColor.black {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    @IBInspectable var currentLineColor: UIColor = UIColor.red {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    @IBInspectable var lineThickness: CGFloat = 10 {
+        didSet {
+            setNeedsDisplay()
+        }
     }
 }
