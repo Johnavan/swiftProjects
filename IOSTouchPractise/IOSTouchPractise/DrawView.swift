@@ -77,12 +77,19 @@ class DrawView: UIView {
     
     @objc func doubleTap(_ gestureRecognizer: UIGestureRecognizer){
         print("I got a double tap")
-        let tapPoint = gestureRecognizer.location(in: self)
-        selectedLineIndex = indexOfLineNearPoint(point: tapPoint)
-        finishedLine.remove(at: selectedLineIndex!)
+        
+        if (selectedLineIndex != nil) {
+            finishedLine.remove(at: selectedLineIndex!)
+        } else {
+            selectedLineIndex = nil
+            currentLines.removeAll(keepingCapacity: false)
+            finishedLine.removeAll(keepingCapacity: false)
+        }
         //currentLines.removeAll(keepingCapacity: false)
         setNeedsDisplay()
     }
+    
+
     
     @objc func tap(_ gestureRecognizer: UIGestureRecognizer){
         print("I got a tap")
