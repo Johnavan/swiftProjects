@@ -18,6 +18,14 @@ class PhotosViewController: UIViewController {
         print("request url:")
         print(url)
         let store = PhotoStore()
-        store.fetchRecentPhotos()
-    }
+        store.fetchRecentPhotos {
+            (photosResult) -> Void in
+            switch photosResult {
+            case let .success(photos):
+                print("Successfully found \(photos.count) photos.")
+            case let .failure(error):
+                print ("Error fetching recent photos: \(error)")
+            }
+        }
+}
 }
